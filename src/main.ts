@@ -1,4 +1,4 @@
-import { createApp } from 'vue'
+import { createApp    } from 'vue'
 import naive from 'naive-ui'
 import i18n from 'vue3-i18n-plugin'
 import { store } from './store/index'
