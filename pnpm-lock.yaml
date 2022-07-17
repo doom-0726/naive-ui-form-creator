@@ -13,6 +13,7 @@ specifiers:
   husky: ^7.0.4
   lint-staged: ^13.0.3
   naive-ui: ^2.31.0
+  prettier: ^2.7.1
   typescript: ^4.7.4
   uuid: ^8.3.2
   vite: ^3.0.0
@@ -42,10 +43,11 @@ devDependencies:
   eslint: 8.20.0
   husky: 7.0.4
   lint-staged: 13.0.3
+  prettier: 2.7.1
   typescript: 4.7.4
   vite: 3.0.0
   vite-plugin-dts: 1.3.0_vite@3.0.0
-  vitepress: 1.0.0-draft.8
+  vitepress: 1.0.0-draft.8_tbq7qqbbedk3tko5ldgdax3r7a
   vue-tsc: 0.3.0_typescript@4.7.4
 
 packages:
@@ -56,13 +58,14 @@ packages:
       '@algolia/autocomplete-shared': 1.7.1
     dev: true
 
-  /@algolia/autocomplete-preset-algolia/1.7.1_algoliasearch@4.13.1:
+  /@algolia/autocomplete-preset-algolia/1.7.1_jr4xm7x4v4vd7iifhnoo3rb33u:
     resolution: {integrity: sha512-pJwmIxeJCymU1M6cGujnaIYcY3QPOVYZOXhFkWVM7IxKzy272BwCvMFMyc5NpG/QmiObBxjo7myd060OeTNJXg==}
     peerDependencies:
       '@algolia/client-search': ^4.9.1
       algoliasearch: ^4.9.1
     dependencies:
       '@algolia/autocomplete-shared': 1.7.1
+      '@algolia/client-search': 4.13.1
       algoliasearch: 4.13.1
     dev: true
 
@@ -573,10 +576,10 @@ packages:
     resolution: {integrity: sha512-utLgg7E1agqQeqCJn05DWC7XXMk4tMUUnL7MZupcknRu2OzGN13qwey2qA/0NAKkVBGugiWtON0+rlU0QIPojg==}
     dev: true
 
-  /@docsearch/js/3.1.1:
+  /@docsearch/js/3.1.1_tbq7qqbbedk3tko5ldgdax3r7a:
     resolution: {integrity: sha512-bt7l2aKRoSnLUuX+s4LVQ1a7AF2c9myiZNv5uvQCePG5tpvVGpwrnMwqVXOUJn9q6FwVVhOrQMO/t+QmnnAEUw==}
     dependencies:
-      '@docsearch/react': 3.1.1
+      '@docsearch/react': 3.1.1_tbq7qqbbedk3tko5ldgdax3r7a
       preact: 10.10.0
     transitivePeerDependencies:
       - '@algolia/client-search'
@@ -585,7 +588,7 @@ packages:
       - react-dom
     dev: true
 
-  /@docsearch/react/3.1.1:
+  /@docsearch/react/3.1.1_tbq7qqbbedk3tko5ldgdax3r7a:
     resolution: {integrity: sha512-cfoql4qvtsVRqBMYxhlGNpvyy/KlCoPqjIsJSZYqYf9AplZncKjLBTcwBu6RXFMVCe30cIFljniI4OjqAU67pQ==}
     peerDependencies:
       '@types/react': '>= 16.8.0 < 19.0.0'
@@ -593,9 +596,12 @@ packages:
       react-dom: '>= 16.8.0 < 19.0.0'
     dependencies:
       '@algolia/autocomplete-core': 1.7.1
-      '@algolia/autocomplete-preset-algolia': 1.7.1_algoliasearch@4.13.1
+      '@algolia/autocomplete-preset-algolia': 1.7.1_jr4xm7x4v4vd7iifhnoo3rb33u
       '@docsearch/css': 3.1.1
+      '@types/react': 18.0.15
       algoliasearch: 4.13.1
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
     transitivePeerDependencies:
       - '@algolia/client-search'
     dev: true
@@ -843,6 +849,22 @@ packages:
 
   /@types/normalize-package-data/2.4.1:
     resolution: {integrity: sha512-Gj7cI7z+98M282Tqmp2K5EIsoouUEzbBJhQQzDE3jSIRk6r9gsz0oUokqIUR4u1R3dMHo0pDHM7sNOHyhulypw==}
+    dev: true
+
+  /@types/prop-types/15.7.5:
+    resolution: {integrity: sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==}
+    dev: true
+
+  /@types/react/18.0.15:
+    resolution: {integrity: sha512-iz3BtLuIYH1uWdsv6wXYdhozhqj20oD4/Hk2DNXIn1kFsmp9x8d9QB6FnPhfkbhd2PgEONt9Q1x/ebkwjfFLow==}
+    dependencies:
+      '@types/prop-types': 15.7.5
+      '@types/scheduler': 0.16.2
+      csstype: 3.0.11
+    dev: true
+
+  /@types/scheduler/0.16.2:
+    resolution: {integrity: sha512-hppQEBDmlwhFAXKJX2KnWLYu5yMfi91yazPb2l+lbJiwW+wdo1gNeRA+3RgNSO39WYX2euey41KEwnqesU2Jew==}
     dev: true
 
   /@types/unist/2.0.6:
@@ -1695,7 +1717,6 @@ packages:
 
   /csstype/3.0.11:
     resolution: {integrity: sha512-sa6P2wJ+CAbgyy4KFssIb/JNMLxFvKF1pCYCSXS8ZMuqZnMsrxqI2E5sPyoTpxoPU/gVZMzr2zjOfg8GIZOMsw==}
-    dev: false
 
   /date-fns-tz/1.3.6_date-fns@2.28.0:
     resolution: {integrity: sha512-C8q7mErvG4INw1ZwAFmPlGjEo5Sv4udjKVbTc03zpP9cu6cp5AemFzKhz0V68LGcWEtX5mJudzzg3G04emIxLA==}
@@ -3609,6 +3630,12 @@ packages:
     engines: {node: '>= 0.8.0'}
     dev: true
 
+  /prettier/2.7.1:
+    resolution: {integrity: sha512-ujppO+MkdPqoVINuDFDRLClm7D78qbDt0/NR+wp5FqEZOoTNAjPHWj17QRhu7geIHJfcNhRk1XVQmF8Bp3ye+g==}
+    engines: {node: '>=10.13.0'}
+    hasBin: true
+    dev: true
+
   /promise/7.3.1:
     resolution: {integrity: sha512-nolQXZ/4L+bP/UGlkfaIujX9BKxGwmQ9OT4mOt5yvy8iK1h3wqTEJCijzGANTCCl9nWjY41juyAn2K3Q1hLLTg==}
     dependencies:
@@ -3723,8 +3750,25 @@ packages:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
     dev: true
 
+  /react-dom/18.2.0_react@18.2.0:
+    resolution: {integrity: sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==}
+    peerDependencies:
+      react: ^18.2.0
+    dependencies:
+      loose-envify: 1.4.0
+      react: 18.2.0
+      scheduler: 0.23.0
+    dev: true
+
   /react-is/16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
+    dev: true
+
+  /react/18.2.0:
+    resolution: {integrity: sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==}
+    engines: {node: '>=0.10.0'}
+    dependencies:
+      loose-envify: 1.4.0
     dev: true
 
   /read-pkg-up/7.0.1:
@@ -3857,6 +3901,12 @@ packages:
     resolution: {integrity: sha512-rx+x8AMzKb5Q5lQ95Zoi6ZbJqwCLkqi3XuJXp5P3rT8OEc6sZCJG5AE5dU3lsgRr/F4Bs31jSlVN+j5KrsGu9A==}
     dependencies:
       regexp-tree: 0.1.24
+    dev: true
+
+  /scheduler/0.23.0:
+    resolution: {integrity: sha512-CtuThmgHNg7zIZWAXi3AsyIzA3n4xx7aNyjwC2VJldO2LMVDhFK+63xGqq6CsJH4rTAt6/M+N4GhZiDYPx9eUw==}
+    dependencies:
+      loose-envify: 1.4.0
     dev: true
 
   /seemly/0.3.5:
@@ -4346,13 +4396,13 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /vitepress/1.0.0-draft.8:
+  /vitepress/1.0.0-draft.8_tbq7qqbbedk3tko5ldgdax3r7a:
     resolution: {integrity: sha512-r1cphHgtJ/KFwtph3cyusGWjRyX0NHvwfBboKnG5mRJpOP/JyvX5q5+NIiRYElPgdFXU7Roxkl8BcJbxWht56Q==}
     engines: {node: '>=14.6.0'}
     hasBin: true
     dependencies:
       '@docsearch/css': 3.1.1
-      '@docsearch/js': 3.1.1
+      '@docsearch/js': 3.1.1_tbq7qqbbedk3tko5ldgdax3r7a
       '@vitejs/plugin-vue': 2.3.3_vite@2.9.14+vue@3.2.33
       '@vueuse/core': 8.9.4_vue@3.2.33
       body-scroll-lock: 4.0.0-beta.0
