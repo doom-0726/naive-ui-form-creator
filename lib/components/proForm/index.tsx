@@ -94,12 +94,10 @@ export default defineComponent({
 
     const handleSubmitClick = () => {
       formRef.value?.validate((errors) => {
-        if (!errors) {
+        if (!errors)
           props?.onFinish && props.onFinish()
-        }
-        else {
+        else
           props?.onError && props.onError(errors)
-        }
       })
     }
 
@@ -135,17 +133,17 @@ export default defineComponent({
         return
       return item.tooltipConfig?.show
         ? (
-          <NTooltip trigger="hover">
-            {{
-              trigger: () => (
-                <NIcon size={20}>
-                  <QuestionCircle48Regular />
-                </NIcon>
-              ),
-              default: () => item.tooltipConfig?.text,
-            }}
-          </NTooltip>
-        )
+        <NTooltip trigger="hover">
+          {{
+            trigger: () => (
+              <NIcon size={20}>
+                <QuestionCircle48Regular />
+              </NIcon>
+            ),
+            default: () => item.tooltipConfig?.text,
+          }}
+        </NTooltip>
+          )
         : null
     }
 
@@ -177,31 +175,31 @@ export default defineComponent({
         case 'radio':
           return item.valueEnum.length > 1
             ? (
-              <NRadioGroup
-                {...(item.props as RadioGroupProps)}
-                value={modalData.value[item.key]}
-                onUpdateValue={(value) => {
-                  handleInputUpdateValue(value, item.key)
-                }}
-              >
-                {item.valueEnum.map(valueItem => (
-                  <NRadio {...valueItem} key={valueItem.value} />
-                ))}
-              </NRadioGroup>
-            )
+            <NRadioGroup
+              {...(item.props as RadioGroupProps)}
+              value={modalData.value[item.key]}
+              onUpdateValue={(value) => {
+                handleInputUpdateValue(value, item.key)
+              }}
+            >
+              {item.valueEnum.map(valueItem => (
+                <NRadio {...valueItem} key={valueItem.value} />
+              ))}
+            </NRadioGroup>
+              )
             : (
-              item.valueEnum.map(valueItem => (
-                <NRadio
-                  {...item.props}
-                  {...valueItem}
-                  key={valueItem.value}
-                  checked={valueItem.value === modalData.value[item.key]}
-                  onUpdateChecked={(value) => {
-                    handleRadioUpdateChecked(value, item.key, valueItem.value)
-                  }}
-                />
-              ))
-            )
+                item.valueEnum.map(valueItem => (
+              <NRadio
+                {...item.props}
+                {...valueItem}
+                key={valueItem.value}
+                checked={valueItem.value === modalData.value[item.key]}
+                onUpdateChecked={(value) => {
+                  handleRadioUpdateChecked(value, item.key, valueItem.value)
+                }}
+              />
+                ))
+              )
 
         case 'select':
           return (
@@ -273,34 +271,34 @@ export default defineComponent({
         case 'checkbox':
           return item.valueEnum.length > 1
             ? (
-              <NCheckboxGroup
-                {...(item.props as Omit<
-                  CheckboxGroupProps,
-                  'onUpdateValue' | 'value'
-                >)}
-                onUpdateValue={(value) => {
+            <NCheckboxGroup
+              {...(item.props as Omit<
+                CheckboxGroupProps,
+                'onUpdateValue' | 'value'
+              >)}
+              onUpdateValue={(value) => {
+                handleInputUpdateValue(value, item.key)
+              }}
+              value={modalData.value[item.key]}
+            >
+              {item.valueEnum.map(valueItem => (
+                <NCheckbox key={valueItem.value} {...valueItem} />
+              ))}
+            </NCheckboxGroup>
+              )
+            : (
+                item.valueEnum.map(valueItem => (
+              <NCheckbox
+                {...item.props}
+                key={valueItem.value}
+                {...valueItem}
+                onUpdateChecked={(value) => {
                   handleInputUpdateValue(value, item.key)
                 }}
                 value={modalData.value[item.key]}
-              >
-                {item.valueEnum.map(valueItem => (
-                  <NCheckbox key={valueItem.value} {...valueItem} />
-                ))}
-              </NCheckboxGroup>
-            )
-            : (
-              item.valueEnum.map(valueItem => (
-                <NCheckbox
-                  {...item.props}
-                  key={valueItem.value}
-                  {...valueItem}
-                  onUpdateChecked={(value) => {
-                    handleInputUpdateValue(value, item.key)
-                  }}
-                  value={modalData.value[item.key]}
-                />
-              ))
-            )
+              />
+                ))
+              )
 
         case 'upload':
           return (
@@ -394,24 +392,24 @@ export default defineComponent({
         <NSpace justify="center">
           {validateButton === true
             ? (
-              <NButton onClick={handleValidateClick} type="warning">
-                验证
-              </NButton>
-            )
+            <NButton onClick={handleValidateClick} type="warning">
+              验证
+            </NButton>
+              )
             : null}
           {resetButton === true
             ? (
-              <NButton onClick={handleResetClick} type="error">
-                重置
-              </NButton>
-            )
+            <NButton onClick={handleResetClick} type="error">
+              重置
+            </NButton>
+              )
             : null}
           {submitButton === true
             ? (
-              <NButton onClick={handleSubmitClick} type="primary">
-                提交
-              </NButton>
-            )
+            <NButton onClick={handleSubmitClick} type="primary">
+              提交
+            </NButton>
+              )
             : null}
         </NSpace>
       </Fragment>
