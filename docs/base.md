@@ -144,10 +144,6 @@ const onValuesChange = (key,value) => {
 
 </script>
 
-# Docs
-
-This is a .md using a custom component
-
 <proForm 
 :formItems="formItems" 
 :formProps="formProps" 
@@ -157,7 +153,3 @@ isKeyPressSubmit
 :initialValues="initialValues" 
 :onValuesChange="onValuesChange"
 />
-
-## More docs
-
-...

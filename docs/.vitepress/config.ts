@@ -5,7 +5,10 @@ export default {
     sidebar: [
       {
         text: '介绍',
-        items: [{ text: '示例', link: '/introduction' }],
+        items: [
+          { text: '基础示例', link: '/base' },
+          { text: '参数', link: '/prop' },
+        ],
       },
     ],
   },
