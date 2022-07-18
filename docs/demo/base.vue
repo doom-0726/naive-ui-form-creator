@@ -1,4 +1,3 @@
-<!-- eslint-disable no-console -->
 <script setup>
 import proForm from '../lib/components/proForm/index.tsx'
 
@@ -138,6 +137,7 @@ const initialValues = {
 }
 
 const onValuesChange = (key, value) => {
+  // eslint-disable-next-line no-console
   console.log(key, value)
 }
 </script>
