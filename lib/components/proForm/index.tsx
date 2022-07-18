@@ -42,7 +42,7 @@ import {
 } from 'naive-ui'
 import type { FormValidateCallback } from 'naive-ui/es/form/src/interface'
 import type { FileInfo } from 'naive-ui/es/upload/src/interface'
-import { QuestionCircle48Regular } from '@vicons/fluent'
+import QuestionCircle48Regular from '../../icon/QuestionCircle48Regular.vue'
 import type { ProFormItem } from './types/props'
 
 const ProFormProps = {
