@@ -15,13 +15,11 @@ import type {
   TimePickerProps,
   UploadProps,
 } from 'naive-ui'
-// import type { FileInfo } from 'naive-ui/es/upload/src/interface'
 
 type addCommonProps<T extends Record<string, any>> = T & {
   formItemProps?: Omit<FormItemProps, 'label' | 'path'>
   label: string
   key: string
-  show?: boolean
   tooltipConfig?: {
     show: boolean
     text: string

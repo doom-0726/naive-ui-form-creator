@@ -1,7 +1,16 @@
 /* eslint-disable react/no-string-refs */
 import type { ComputedRef, PropType } from 'vue'
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { Fragment, computed, defineComponent, h, ref, watchEffect } from 'vue'
+
+import {
+  Fragment,
+  computed,
+  defineComponent,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  h,
+  reactive,
+  ref,
+  watchEffect,
+} from 'vue'
 import type {
   CheckboxGroupProps,
   FormInst,
@@ -38,41 +47,50 @@ import type { ProFormItem } from './types/props'
 
 const ProFormProps = {
   formProps: Object as PropType<Omit<FormProps, 'model'>>,
-  formItems: Array as PropType<ProFormItem[]>,
+  formItems: {
+    type: Array as PropType<ProFormItem[]>,
+    default: [],
+  },
   resetButton: Boolean,
   validateButton: Boolean,
   submitButton: {
     type: Boolean,
     default: true,
   },
+  title: String,
+  isKeyPressSubmit: Boolean,
+  initialValues: Object as PropType<Record<string, any>>,
+  values: Object as PropType<Record<string, any>>,
   onReset: Function as PropType<() => void>,
   onFinish: Function as PropType<() => void>,
   onError: Function as PropType<FormValidateCallback>,
   onValidate: Function as PropType<() => void>,
-  title: String,
-  isKeyPressSubmit: Boolean,
+  onValuesChange: Function as PropType<(key: string, value: any) => void>,
 }
 
 export default defineComponent({
   name: 'ProForm',
   props: ProFormProps,
   setup(props) {
-    const getObj = (data: ProFormItem[] | undefined) => {
-      if (!data)
-        return {}
+    const modalData = reactive<Record<string, any>>({})
 
-      const obj: Record<string, any> = {}
-
-      data.forEach((item) => {
-        if (item.type === 'divider')
-          return
-        obj[item.key] = null
-      })
-
-      return obj
+    const handleInitialValues = () => {
+      for (const key in props.initialValues) {
+        if (Object.prototype.hasOwnProperty.call(props.initialValues, key))
+          modalData[key] = props.initialValues[key]
+      }
     }
 
-    const modalData = ref<Record<string, any>>(getObj(props.formItems))
+    handleInitialValues()
+
+    watchEffect(() => {
+      if (props.values !== undefined) {
+        for (const key in props.values) {
+          if (Object.prototype.hasOwnProperty.call(props.values, key))
+            modalData[key] = props.values[key]
+        }
+      }
+    })
 
     const formRef = ref<FormInst | null>(null)
 
@@ -85,9 +103,9 @@ export default defineComponent({
     }
 
     const handleResetClick = () => {
-      for (const key in modalData.value) {
-        if (Object.prototype.hasOwnProperty.call(modalData.value, key))
-          modalData.value[key] = null
+      for (const key in modalData) {
+        if (Object.prototype.hasOwnProperty.call(modalData, key))
+          modalData[key] = null
       }
       props?.onReset && props.onReset()
     }
@@ -96,8 +114,7 @@ export default defineComponent({
       formRef.value?.validate((errors) => {
         if (!errors)
           props?.onFinish && props.onFinish()
-        else
-          props?.onError && props.onError(errors)
+        else props?.onError && props.onError(errors)
       })
     }
 
@@ -105,7 +122,8 @@ export default defineComponent({
       val: string | number | null | (string | number)[] | Required<FileInfo>[],
       key: string,
     ) => {
-      modalData.value[key] = val
+      modalData[key] = val
+      props?.onValuesChange && props.onValuesChange(key, val)
     }
 
     const handleRadioUpdateChecked = (
@@ -114,7 +132,9 @@ export default defineComponent({
       flag: string | number,
     ) => {
       if (val)
-        modalData.value[key] = flag
+        modalData[key] = flag
+      else modalData[key] = null
+      props?.onValuesChange && props.onValuesChange(key, val)
     }
 
     const keyDownHandler = (e: KeyboardEvent) => {
@@ -155,7 +175,7 @@ export default defineComponent({
           return (
             <NInput
               {...item.props}
-              value={modalData.value[item.key]}
+              value={modalData[item.key]}
               onUpdateValue={(value) => {
                 handleInputUpdateValue(value, item.key)
               }}
@@ -165,7 +185,7 @@ export default defineComponent({
           return (
             <NInputNumber
               {...item.props}
-              value={modalData.value[item.key]}
+              value={modalData[item.key]}
               onUpdateValue={(value) => {
                 handleInputUpdateValue(value, item.key)
               }}
@@ -177,7 +197,7 @@ export default defineComponent({
             ? (
             <NRadioGroup
               {...(item.props as RadioGroupProps)}
-              value={modalData.value[item.key]}
+              value={modalData[item.key]}
               onUpdateValue={(value) => {
                 handleInputUpdateValue(value, item.key)
               }}
@@ -193,7 +213,7 @@ export default defineComponent({
                 {...item.props}
                 {...valueItem}
                 key={valueItem.value}
-                checked={valueItem.value === modalData.value[item.key]}
+                checked={valueItem.value === modalData[item.key]}
                 onUpdateChecked={(value) => {
                   handleRadioUpdateChecked(value, item.key, valueItem.value)
                 }}
@@ -206,7 +226,7 @@ export default defineComponent({
             <NSelect
               {...item.props}
               options={item.valueEnum}
-              value={modalData.value[item.key]}
+              value={modalData[item.key]}
               onUpdateValue={(value) => {
                 handleInputUpdateValue(value, item.key)
               }}
@@ -217,7 +237,7 @@ export default defineComponent({
           return (
             <NRate
               {...item.props}
-              value={modalData.value[item.key]}
+              value={modalData[item.key]}
               onUpdateValue={(value) => {
                 handleInputUpdateValue(value, item.key)
               }}
@@ -228,7 +248,7 @@ export default defineComponent({
           return (
             <NSwitch
               {...item.props}
-              value={modalData.value[item.key]}
+              value={modalData[item.key]}
               onUpdateValue={(value) => {
                 handleInputUpdateValue(value, item.key)
               }}
@@ -239,7 +259,7 @@ export default defineComponent({
           return (
             <NTimePicker
               {...item.props}
-              value={modalData.value[item.key]}
+              value={modalData[item.key]}
               onUpdateValue={(value) => {
                 handleInputUpdateValue(value, item.key)
               }}
@@ -253,7 +273,7 @@ export default defineComponent({
               onUpdateValue={(value) => {
                 handleInputUpdateValue(value, item.key)
               }}
-              value={modalData.value[item.key]}
+              value={modalData[item.key]}
             />
           )
 
@@ -264,7 +284,7 @@ export default defineComponent({
               onUpdateValue={(value) => {
                 handleInputUpdateValue(value, item.key)
               }}
-              value={modalData.value[item.key]}
+              value={modalData[item.key]}
             />
           )
 
@@ -279,7 +299,7 @@ export default defineComponent({
               onUpdateValue={(value) => {
                 handleInputUpdateValue(value, item.key)
               }}
-              value={modalData.value[item.key]}
+              value={modalData[item.key]}
             >
               {item.valueEnum.map(valueItem => (
                 <NCheckbox key={valueItem.value} {...valueItem} />
@@ -295,7 +315,7 @@ export default defineComponent({
                 onUpdateChecked={(value) => {
                   handleInputUpdateValue(value, item.key)
                 }}
-                value={modalData.value[item.key]}
+                value={modalData[item.key]}
               />
                 ))
               )
@@ -304,7 +324,7 @@ export default defineComponent({
           return (
             <NUpload
               {...item.props}
-              fileList={modalData.value[item.key] ?? []}
+              fileList={modalData[item.key] ?? []}
               onUpdateFileList={(value) => {
                 handleInputUpdateValue(value, item.key)
               }}
@@ -319,7 +339,7 @@ export default defineComponent({
               onUpdateValue={(value) => {
                 handleInputUpdateValue(value, item.key)
               }}
-              value={modalData.value[item.key]}
+              value={modalData[item.key]}
             />
           )
 

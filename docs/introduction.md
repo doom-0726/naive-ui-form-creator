@@ -133,6 +133,14 @@ const formProps = {
       }
 }
 
+const initialValues = {
+    name:'hello'
+}
+
+const onValuesChange = (key,value) => {
+    console.log(key,value)
+}
+
 
 </script>
 
@@ -140,7 +148,15 @@ const formProps = {
 
 This is a .md using a custom component
 
-<proForm :formItems="formItems" :formProps="formProps" title="个人信息录入" resetButton isKeyPressSubmit/>
+<proForm 
+:formItems="formItems" 
+:formProps="formProps" 
+title="个人信息录入" 
+resetButton 
+isKeyPressSubmit 
+:initialValues="initialValues" 
+:onValuesChange="onValuesChange"
+/>
 
 ## More docs
 
