@@ -1,3 +1,5 @@
+## 基础示例
+
 <script setup>
 import proForm from '../lib/components/proForm/index.tsx'
 
@@ -153,3 +155,7 @@ isKeyPressSubmit
 :initialValues="initialValues" 
 :onValuesChange="onValuesChange"
 />
+
+## 代码
+
+<<< @/demo/base.vue

@@ -7,7 +7,7 @@ export default {
         text: '介绍',
         items: [
           { text: '基础示例', link: '/base' },
-          { text: '参数', link: '/prop' },
+          { text: '参数', link: '/props' },
         ],
       },
     ],
