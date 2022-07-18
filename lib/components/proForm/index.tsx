@@ -64,7 +64,7 @@ const ProFormProps = {
   onReset: Function as PropType<() => void>,
   onFinish: Function as PropType<() => void>,
   onError: Function as PropType<FormValidateCallback>,
-  onValidate: Function as PropType<() => void>,
+  onValidate: Function as PropType<(value: Record<string, any>) => void>,
   onValuesChange: Function as PropType<(key: string, value: any) => void>,
 }
 
@@ -97,7 +97,7 @@ export default defineComponent({
     const handleValidateClick = () => {
       formRef.value?.validate((errors) => {
         if (!errors)
-          props?.onValidate && props.onValidate()
+          props?.onValidate && props.onValidate(modalData)
         else props?.onError && props.onError(errors)
       })
     }
