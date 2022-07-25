@@ -39,8 +39,7 @@
     "vue-tsc": "^0.3.0"
   },
   "peerDependencies": {
-    "naive-ui": "^2.31.0",
-    "vue": "^3.0.0"
+    "naive-ui": "^2.31.0"
   },
   "lint-staged": {
     "*.ts": [

@@ -139,7 +139,6 @@ const initialValues = {
 }
 
 const onValuesChange = (key, value) => {
-  // eslint-disable-next-line no-console
   console.log(key, value)
 }
 </script>
